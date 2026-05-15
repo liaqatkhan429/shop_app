@@ -19,32 +19,32 @@ class DashboardViewModel extends ChangeNotifier {
   double get totalClientsGrowth => 8.0;
 
   // Dummy recent invoices
-  List<InvoiceModel> get recentInvoices => [
-    InvoiceModel(
-      invoiceNo: '#INV-2024-001',
-      clientId: 'c1',
-      clientName: 'Skyline Modern Build',
-      date: DateTime(2023, 10, 24),
-      items: [],
-      status: 'Paid',
-    ),
-    InvoiceModel(
-      invoiceNo: '#INV-2024-002',
-      clientId: 'c2',
-      clientName: 'Urban Renovations Ltd.',
-      date: DateTime(2023, 10, 23),
-      items: [],
-      status: 'Pending',
-    ),
-    InvoiceModel(
-      invoiceNo: '#INV-2024-003',
-      clientId: 'c3',
-      clientName: 'Terra Concrete Corp',
-      date: DateTime(2023, 10, 22),
-      items: [],
-      status: 'Paid',
-    ),
-  ];
+  // List<InvoiceModel> get recentInvoices => [
+  //   InvoiceModel(
+  //     invoiceNo: '#INV-2024-001',
+  //     clientId: 'c1',
+  //     clientName: 'Skyline Modern Build',
+  //     date: DateTime(2023, 10, 24),
+  //     items: [],
+  //     status: 'Paid',
+  //   ),
+  //   InvoiceModel(
+  //     invoiceNo: '#INV-2024-002',
+  //     clientId: 'c2',
+  //     clientName: 'Urban Renovations Ltd.',
+  //     date: DateTime(2023, 10, 23),
+  //     items: [],
+  //     status: 'Pending',
+  //   ),
+  //   InvoiceModel(
+  //     invoiceNo: '#INV-2024-003',
+  //     clientId: 'c3',
+  //     clientName: 'Terra Concrete Corp',
+  //     date: DateTime(2023, 10, 22),
+  //     items: [],
+  //     status: 'Paid',
+  //   ),
+  // ];
 
   Future<void> loadDashboardData() async {
     _isLoading = true;

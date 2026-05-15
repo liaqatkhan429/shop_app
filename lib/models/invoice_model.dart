@@ -1,43 +1,67 @@
-import 'package:shop_app/models/product_model.dart';
-
-
-class InvoiceItemModel {
-  final ProductModel item;
-  final int quantity;
-  final double rate;
-
-  InvoiceItemModel({
-    required this.item,
-    required this.quantity,
-    required this.rate,
-  });
-
-  double get total => quantity * rate;
-}
+import 'invoice_item_model.dart';
 
 class InvoiceModel {
+  final String id;
+
+  // INVC-01
   final String invoiceNo;
-  final String clientId;
-  final String clientName;
-  final DateTime date;
+
+  final String customerId;
+  final String customerName;
+
   final List<InvoiceItemModel> items;
-  final double discountPercentage;
-  final double taxPercentage;
-  final String status;
+
+  final int grandTotal;
+  final int discount;
+  final int finalTotal;
+
+  final int createdAt;
 
   InvoiceModel({
+    required this.id,
     required this.invoiceNo,
-    required this.clientId,
-    required this.clientName,
-    required this.date,
+    required this.customerId,
+    required this.customerName,
     required this.items,
-    this.discountPercentage = 0.0,
-    this.taxPercentage = 0.0,
-    this.status = 'Pending',
+    required this.grandTotal,
+    required this.discount,
+    required this.finalTotal,
+    required this.createdAt,
   });
 
-  double get subtotal => items.fold(0, (sum, item) => sum + item.total);
-  double get discountAmount => subtotal * (discountPercentage / 100);
-  double get taxAmount => (subtotal - discountAmount) * (taxPercentage / 100);
-  double get grandTotal => subtotal - discountAmount + taxAmount;
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'invoiceNo': invoiceNo,
+      'customerId': customerId,
+      'customerName': customerName,
+      'items': items.map((e) => e.toMap()).toList(),
+      'grandTotal': grandTotal,
+      'discount': discount,
+      'finalTotal': finalTotal,
+      'createdAt': createdAt,
+    };
+  }
+
+  factory InvoiceModel.fromMap(Map<String, dynamic> map) {
+    return InvoiceModel(
+      id: map['id'],
+      invoiceNo: map['invoiceNo'],
+      customerId: map['customerId'],
+      customerName: map['customerName'],
+
+      items: List<InvoiceItemModel>.from(
+        map['items'].map(
+              (x) => InvoiceItemModel.fromMap(
+            Map<String, dynamic>.from(x),
+          ),
+        ),
+      ),
+
+      grandTotal: map['grandTotal'],
+      discount: map['discount'],
+      finalTotal: map['finalTotal'],
+      createdAt: map['createdAt'],
+    );
+  }
 }
